@@ -7,7 +7,6 @@ const apiClient = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Request interceptor — attach token to every request
 apiClient.interceptors.request.use(
   async (config) => {
     const token = await AsyncStorage.getItem('auth_token');
@@ -19,7 +18,6 @@ apiClient.interceptors.request.use(
   error => Promise.reject(error)
 );
 
-// Response interceptor
 apiClient.interceptors.response.use(
   response => response,
   error => {
@@ -30,7 +28,6 @@ apiClient.interceptors.response.use(
   }
 );
 
-// APIs remain the same...
 export const loginApi = (mobile: string) =>
   apiClient.post('driver/login/driver-login.php', {
     mobile,
